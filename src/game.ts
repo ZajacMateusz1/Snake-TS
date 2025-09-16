@@ -18,5 +18,8 @@ export default class Game {
     console.log("Game started!");
     const food = new Food(this.config);
     food.drawFood(this.ctx);
+    const snake = new Snake(this.config);
+    window.addEventListener("keydown", (e: KeyboardEvent) => snake.move(e));
+    snake.renderSnake(this.ctx);
   }
 }

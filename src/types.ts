@@ -3,3 +3,8 @@ export type Config = {
   boardWidth: number;
   boardHeight: number;
 };
+
+export type SnakePart = {
+  x: number;
+  y: number;
+};

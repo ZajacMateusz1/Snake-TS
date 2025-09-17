@@ -6,7 +6,6 @@ export default class Game {
   private scoreText: HTMLElement;
   private dialog: HTMLDialogElement;
   private dialogScore: HTMLElement;
-  private dialogCloseButton: HTMLButtonElement;
   private config: Config;
   private score: number;
   grow: boolean;
@@ -15,9 +14,6 @@ export default class Game {
     this.scoreText = document.getElementById("scoreText") as HTMLElement;
     this.dialog = document.getElementById("dialog") as HTMLDialogElement;
     this.dialogScore = document.getElementById("dialogScore") as HTMLElement;
-    this.dialogCloseButton = document.querySelector(
-      "#dialog button"
-    ) as HTMLButtonElement;
     this.score = 0;
     this.config = {
       cellSize: 25,

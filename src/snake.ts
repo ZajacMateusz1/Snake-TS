@@ -4,6 +4,7 @@ export default class Snake {
   public body: SnakePart[];
   private startY: number;
   private direction: Direction;
+  public canChoose: boolean;
   constructor(config: Config) {
     this.config = config;
     this.startY = Math.floor(config.boardHeight / 2);
@@ -13,6 +14,7 @@ export default class Snake {
       { x: 0, y: this.startY },
     ];
     this.direction = "ArrowRight";
+    this.canChoose = true;
   }
   renderSnake() {
     this.config.ctx.fillStyle = "green";
@@ -26,16 +28,41 @@ export default class Snake {
     });
   }
   setDirection(e: KeyboardEvent) {
-    if (e.key === "ArrowUp" && this.direction !== "ArrowDown")
+    if (
+      e.key === "ArrowUp" &&
+      this.direction !== "ArrowDown" &&
+      this.canChoose
+    ) {
+      this.canChoose = false;
       this.direction = "ArrowUp";
-    if (e.key === "ArrowLeft" && this.direction !== "ArrowRight")
+    }
+    if (
+      e.key === "ArrowLeft" &&
+      this.direction !== "ArrowRight" &&
+      this.canChoose
+    ) {
+      this.canChoose = false;
       this.direction = "ArrowLeft";
-    if (e.key === "ArrowDown" && this.direction !== "ArrowUp")
+    }
+    if (
+      e.key === "ArrowDown" &&
+      this.direction !== "ArrowUp" &&
+      this.canChoose
+    ) {
+      this.canChoose = false;
       this.direction = "ArrowDown";
-    if (e.key === "ArrowRight" && this.direction !== "ArrowLeft")
+    }
+    if (
+      e.key === "ArrowRight" &&
+      this.direction !== "ArrowLeft" &&
+      this.canChoose
+    ) {
+      this.canChoose = false;
       this.direction = "ArrowRight";
+    }
   }
   move(grow: boolean) {
+    this.canChoose = true;
     switch (this.direction) {
       case "ArrowUp":
         this.body.unshift({
@@ -65,14 +92,17 @@ export default class Snake {
         break;
     }
     if (!grow) {
-      this.config.ctx.clearRect(
-        this.body[this.body.length - 1].x,
-        this.body[this.body.length - 1].y,
-        this.config.cellSize,
-        this.config.cellSize
-      );
       this.body.pop();
     }
-    this.renderSnake();
+  }
+  checkSelfCollision(): boolean {
+    for (let i = 1; i < this.body.length; i++) {
+      if (
+        this.body[i].x === this.body[0].x &&
+        this.body[i].y === this.body[0].y
+      )
+        return true;
+    }
+    return false;
   }
 }

@@ -1,4 +1,4 @@
-import type { Config } from "./types.ts";
+import type { Config, SnakePart } from "./types.ts";
 export default class Food {
   public x: number;
   public y: number;
@@ -6,14 +6,8 @@ export default class Food {
   private config: Config;
   constructor(config: Config) {
     this.config = config;
-    this.x = this.getRandomPosition(
-      this.config.boardWidth,
-      this.config.cellSize
-    );
-    this.y = this.getRandomPosition(
-      this.config.boardHeight,
-      this.config.cellSize
-    );
+    this.x = 0;
+    this.y = 0;
     this.color = "red";
   }
   private getRandomPosition(boardSize: number, cellSize: number) {
@@ -30,7 +24,9 @@ export default class Food {
       this.config.cellSize
     );
   }
-  respawn() {
+  spawn(body: SnakePart[]) {
+    let isTaken = false;
+
     this.x = this.getRandomPosition(
       this.config.boardWidth,
       this.config.cellSize
@@ -39,6 +35,12 @@ export default class Food {
       this.config.boardHeight,
       this.config.cellSize
     );
-    this.drawFood();
+    for (let i = 0; i < body.length; i++) {
+      if (body[i].x === this.x && body[i].y === this.y) {
+        isTaken = true;
+        break;
+      }
+    }
+    if (isTaken) this.spawn(body);
   }
 }

@@ -8,7 +8,37 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-family: Arial, Helvetica, sans-serif;
 }
 #gameBoard {
   border: 1px solid black;
+}
+#dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 10px;
+}
+#dialog .container {
+  height: 300px;
+  width: 300px;
+  background-color: #383838;
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 32px;
+}
+#dialog button {
+  font-size: 32px;
+  background-color: aliceblue;
+  color: #383838;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
 }

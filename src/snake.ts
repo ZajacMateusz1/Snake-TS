@@ -12,10 +12,10 @@ export default class Snake {
       { x: 0, y: this.startY },
     ];
   }
-  renderSnake(ctx: CanvasRenderingContext2D) {
+  renderSnake() {
     this.body.forEach((snakePart) => {
-      ctx.fillStyle = "green";
-      ctx.fillRect(
+      this.config.ctx.fillStyle = "green";
+      this.config.ctx.fillRect(
         snakePart.x,
         snakePart.y,
         this.config.cellSize,
@@ -32,26 +32,36 @@ export default class Snake {
       case top:
         this.body.unshift({
           x: this.body[0].x,
-          y: this.body[0].y + this.config.cellSize,
+          y: this.body[0].y - this.config.cellSize,
         });
+        break;
       case left:
         this.body.unshift({
           x: this.body[0].x - this.config.cellSize,
           y: this.body[0].y,
         });
+        break;
       case bottom:
         this.body.unshift({
           x: this.body[0].x,
-          y: this.body[0].y - this.config.cellSize,
+          y: this.body[0].y + this.config.cellSize,
         });
+        break;
       case right:
         this.body.unshift({
           x: this.body[0].x + this.config.cellSize,
           y: this.body[0].y,
         });
+        break;
       default:
         break;
     }
+    this.config.ctx.clearRect(
+      this.body[this.body.length - 1].x,
+      this.body[this.body.length - 1].y,
+      this.config.cellSize,
+      this.config.cellSize
+    );
     this.body.pop();
     this.renderSnake();
   }

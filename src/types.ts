@@ -2,6 +2,7 @@ export type Config = {
   cellSize: number;
   boardWidth: number;
   boardHeight: number;
+  ctx: CanvasRenderingContext2D;
 };
 
 export type SnakePart = {

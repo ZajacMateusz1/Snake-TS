@@ -21,8 +21,13 @@ export default class Food {
     const randomCell = Math.floor(Math.random() * cells);
     return randomCell * cellSize;
   }
-  drawFood(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.config.cellSize, this.config.cellSize);
+  drawFood() {
+    this.config.ctx.fillStyle = this.color;
+    this.config.ctx.fillRect(
+      this.x,
+      this.y,
+      this.config.cellSize,
+      this.config.cellSize
+    );
   }
 }

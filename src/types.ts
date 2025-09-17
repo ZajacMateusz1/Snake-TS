@@ -9,3 +9,5 @@ export type SnakePart = {
   x: number;
   y: number;
 };
+
+export type Direction = "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight";

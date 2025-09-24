@@ -8,7 +8,7 @@ export default class Game {
   private dialogScore: HTMLElement;
   private config: Config;
   private score: number;
-  grow: boolean;
+  public grow: boolean;
   constructor() {
     this.gameBoard = document.getElementById("gameBoard") as HTMLCanvasElement;
     this.scoreText = document.getElementById("scoreText") as HTMLElement;
